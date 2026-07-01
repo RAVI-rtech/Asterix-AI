@@ -57,7 +57,7 @@ export default function ChatScreen() {
             <EmptyState
               icon="chatbubble-ellipses-outline"
               title="Start a conversation"
-              description="Ask anything — Asterix AI is ready to help you."
+              description="Ask anything — ASTRAMIND AI is ready to help you."
             />
           </View>
         ) : (
