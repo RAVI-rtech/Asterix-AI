@@ -20,10 +20,10 @@ import { GoldButton } from "@/components/ui/GoldButton";
 import { Typography } from "@/constants/theme";
 
 const MODELS: { id: AIModel; label: string; description: string }[] = [
-  { id: "gpt-4o", label: "GPT-4o", description: "Most capable · Recommended" },
-  { id: "gpt-4o-mini", label: "GPT-4o Mini", description: "Fast & efficient" },
-  { id: "claude-3-5-sonnet", label: "Claude 3.5 Sonnet", description: "Excellent reasoning" },
-  { id: "gemini-pro", label: "Gemini Pro", description: "Google's best model" },
+  { id: "gpt-4o", label: "AstraMind AI", description: "Most capable · Recommended" },
+  { id: "gpt-4o-mini", label: "AstraMind AI Mini", description: "Fast & efficient" },
+  { id: "claude-3-5-sonnet", label: "AstraMind AI 3.5", description: "Excellent reasoning" },
+  { id: "gemini-pro", label: "AstraMind AI Pro", description: "Our's best model" },
 ];
 
 function SectionTitle({ label }: { label: string }) {
