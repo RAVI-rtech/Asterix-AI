@@ -75,6 +75,13 @@ export default function VoiceScreen() {
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <AsterixHeader title="Voice" />
 
+      <View style={styles.subtitle}>
+        <Ionicons name="sparkles-outline" size={13} color={colors.gold} />
+        <Text style={[Typography.small, { color: colors.gold, letterSpacing: 1.2 }]}>
+          SPEAK TO AI
+        </Text>
+      </View>
+
       <View style={[styles.body, { paddingBottom: bottomPad + 80 }]}>
         <Animated.View style={[styles.pulseRing, pulseStyle]}>
           <View style={[styles.ring3, { borderColor: colors.gold + "20" }]} />
@@ -177,6 +184,13 @@ const styles = StyleSheet.create({
     borderRadius: 48,
     alignItems: "center",
     justifyContent: "center",
+  },
+  subtitle: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+    paddingVertical: 6,
   },
   transcriptCard: { width: "100%", marginTop: 8 },
   infoCard: { width: "100%", marginTop: 8 },
