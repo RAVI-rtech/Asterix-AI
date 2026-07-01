@@ -110,7 +110,7 @@ export default function ImageScreen() {
         </GlossyCard>
 
         <GoldButton
-          label={selectedAction ? `Run ${ACTION_ITEMS.find((a) => a.id === selectedAction)?.label}` : "Select an action"}
+          label={selectedAction ? `${ACTION_ITEMS.find((a) => a.id === selectedAction)?.label}` : "Select an action"}
           onPress={() => {}}
           disabled={!selectedAction}
           style={styles.runBtn}
