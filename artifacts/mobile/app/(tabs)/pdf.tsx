@@ -8,7 +8,7 @@ import {
   TextInput,
   Platform,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useColors } from "@/hooks/useColors";
@@ -19,11 +19,11 @@ import { Typography } from "@/constants/theme";
 
 type PDFAction = "summarize" | "qa" | "extract" | "translate";
 
-const PDF_ACTIONS: { id: PDFAction; icon: keyof typeof Feather.glyphMap; label: string }[] = [
-  { id: "summarize", icon: "list", label: "Summarize" },
-  { id: "qa", icon: "help-circle", label: "Q&A" },
-  { id: "extract", icon: "scissors", label: "Extract Data" },
-  { id: "translate", icon: "globe", label: "Translate" },
+const PDF_ACTIONS: { id: PDFAction; icon: keyof typeof Ionicons.glyphMap; label: string }[] = [
+  { id: "summarize", icon: "list-outline", label: "Summarize" },
+  { id: "qa", icon: "help-circle-outline", label: "Q&A" },
+  { id: "extract", icon: "cut-outline", label: "Extract Data" },
+  { id: "translate", icon: "globe-outline", label: "Translate" },
 ];
 
 interface MockDocument {
@@ -56,8 +56,10 @@ export default function PDFScreen() {
       >
         {documents.length === 0 ? (
           <GlossyCard style={styles.uploadCard} bordered>
-            <Feather name="file-plus" size={40} color={colors.gold} />
-            <Text style={[Typography.h3, { color: colors.foreground, marginTop: 12 }]}>
+            <View style={[styles.iconWrap, { backgroundColor: colors.secondary }]}>
+              <Ionicons name="document-attach-outline" size={34} color={colors.gold} />
+            </View>
+            <Text style={[Typography.h3, { color: colors.foreground, marginTop: 14 }]}>
               No Documents
             </Text>
             <Text
@@ -79,7 +81,7 @@ export default function PDFScreen() {
           documents.map((doc) => (
             <GlossyCard key={doc.id} bordered style={styles.docCard}>
               <View style={styles.docRow}>
-                <Feather name="file-text" size={28} color={colors.gold} />
+                <Ionicons name="document-text" size={28} color={colors.gold} />
                 <View style={styles.docInfo}>
                   <Text style={[Typography.bodyMedium, { color: colors.foreground }]}>
                     {doc.name}
@@ -89,7 +91,7 @@ export default function PDFScreen() {
                   </Text>
                 </View>
                 <TouchableOpacity>
-                  <Feather name="trash-2" size={18} color={colors.destructive} />
+                  <Ionicons name="trash-outline" size={18} color={colors.destructive} />
                 </TouchableOpacity>
               </View>
             </GlossyCard>
@@ -113,7 +115,7 @@ export default function PDFScreen() {
                 },
               ]}
             >
-              <Feather
+              <Ionicons
                 name={action.icon}
                 size={14}
                 color={
@@ -161,10 +163,11 @@ export default function PDFScreen() {
         )}
 
         <GlossyCard style={styles.infoCard} goldBorder>
-          <Text style={[Typography.label, { color: colors.gold, marginBottom: 6 }]}>
-            PDF MODULE
-          </Text>
-          <Text style={[Typography.small, { color: colors.mutedForeground, lineHeight: 18 }]}>
+          <View style={styles.infoRow}>
+            <Ionicons name="sparkles-outline" size={16} color={colors.gold} />
+            <Text style={[Typography.label, { color: colors.gold }]}>PDF MODULE</Text>
+          </View>
+          <Text style={[Typography.small, { color: colors.mutedForeground, lineHeight: 18, marginTop: 8 }]}>
             Full PDF parsing, vector embedding, and semantic search will be enabled
             when the FastAPI backend is connected.
           </Text>
@@ -181,6 +184,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 36,
     marginBottom: 8,
+  },
+  iconWrap: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    alignItems: "center",
+    justifyContent: "center",
   },
   docCard: { marginBottom: 0 },
   docRow: { flexDirection: "row", alignItems: "center", gap: 12 },
@@ -203,4 +213,5 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   infoCard: { marginTop: 8 },
+  infoRow: { flexDirection: "row", alignItems: "center", gap: 8 },
 });

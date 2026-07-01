@@ -13,7 +13,7 @@ import Animated, {
   withTiming,
   Easing,
 } from "react-native-reanimated";
-import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useColors } from "@/hooks/useColors";
@@ -40,7 +40,6 @@ export default function VoiceScreen() {
       -1,
       true
     );
-    // Stub — wire to voice recognition in next phase
     setTimeout(() => {
       setTranscript("Voice recognition will be available in the next phase.");
       stopListening();
@@ -70,16 +69,20 @@ export default function VoiceScreen() {
       ? "Listening..."
       : "Processing...";
 
+  const isListening = voiceState === "listening";
+
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <AsterixHeader title="Voice" />
 
       <View style={[styles.body, { paddingBottom: bottomPad + 80 }]}>
         <Animated.View style={[styles.pulseRing, pulseStyle]}>
+          <View style={[styles.ring3, { borderColor: colors.gold + "20" }]} />
+          <View style={[styles.ring2, { borderColor: colors.gold + "40" }]} />
           <View
             style={[
               styles.pulseRingInner,
-              { borderColor: voiceState === "listening" ? colors.gold : colors.border },
+              { borderColor: isListening ? colors.gold : colors.border },
             ]}
           />
         </Animated.View>
@@ -89,19 +92,18 @@ export default function VoiceScreen() {
           style={[
             styles.micButton,
             {
-              backgroundColor:
-                voiceState === "listening" ? colors.gold : colors.secondary,
+              backgroundColor: isListening ? colors.gold : colors.secondary,
+              shadowColor: colors.gold,
+              shadowOpacity: isListening ? 0.45 : 0,
+              shadowRadius: 20,
+              elevation: isListening ? 10 : 0,
             },
           ]}
         >
-          <Feather
-            name={voiceState === "listening" ? "mic" : "mic-off"}
-            size={36}
-            color={
-              voiceState === "listening"
-                ? colors.primaryForeground
-                : colors.mutedForeground
-            }
+          <Ionicons
+            name={isListening ? "mic" : "mic-outline"}
+            size={38}
+            color={isListening ? colors.primaryForeground : colors.mutedForeground}
           />
         </TouchableOpacity>
 
@@ -121,10 +123,11 @@ export default function VoiceScreen() {
         )}
 
         <GlossyCard style={styles.infoCard} goldBorder>
-          <Text style={[Typography.label, { color: colors.gold, marginBottom: 8 }]}>
-            VOICE MODULE
-          </Text>
-          <Text style={[Typography.small, { color: colors.mutedForeground, lineHeight: 18 }]}>
+          <View style={styles.infoRow}>
+            <Ionicons name="sparkles-outline" size={16} color={colors.gold} />
+            <Text style={[Typography.label, { color: colors.gold }]}>VOICE MODULE</Text>
+          </View>
+          <Text style={[Typography.small, { color: colors.mutedForeground, lineHeight: 18, marginTop: 8 }]}>
             Speech-to-text recognition, text-to-speech synthesis, and wake-word detection
             will be enabled when AI features are wired to the backend.
           </Text>
@@ -145,16 +148,27 @@ const styles = StyleSheet.create({
   },
   pulseRing: {
     position: "absolute",
-    width: 160,
-    height: 160,
-    borderRadius: 80,
     alignItems: "center",
     justifyContent: "center",
   },
+  ring3: {
+    position: "absolute",
+    width: 190,
+    height: 190,
+    borderRadius: 95,
+    borderWidth: 1,
+  },
+  ring2: {
+    position: "absolute",
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    borderWidth: 1,
+  },
   pulseRingInner: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
+    width: 118,
+    height: 118,
+    borderRadius: 59,
     borderWidth: 1.5,
   },
   micButton: {
@@ -166,4 +180,5 @@ const styles = StyleSheet.create({
   },
   transcriptCard: { width: "100%", marginTop: 8 },
   infoCard: { width: "100%", marginTop: 8 },
+  infoRow: { flexDirection: "row", alignItems: "center", gap: 8 },
 });

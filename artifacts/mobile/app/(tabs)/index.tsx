@@ -55,7 +55,7 @@ export default function ChatScreen() {
         {messages.length === 0 ? (
           <View style={styles.flex}>
             <EmptyState
-              icon="message-circle"
+              icon="chatbubble-ellipses-outline"
               title="Start a conversation"
               description="Ask anything — Asterix AI is ready to help you."
             />

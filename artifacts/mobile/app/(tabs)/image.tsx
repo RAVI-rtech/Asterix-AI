@@ -7,23 +7,22 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useColors } from "@/hooks/useColors";
 import { AsterixHeader } from "@/components/ui/AsterixHeader";
 import { GlossyCard } from "@/components/ui/GlossyCard";
 import { GoldButton } from "@/components/ui/GoldButton";
-import { EmptyState } from "@/components/ui/EmptyState";
 import { Typography } from "@/constants/theme";
 
 type ImageAction = "analyze" | "generate" | "edit" | "ocr";
 
-const ACTION_ITEMS: { id: ImageAction; icon: keyof typeof Feather.glyphMap; label: string; description: string }[] = [
-  { id: "analyze", icon: "eye", label: "Analyze Image", description: "Describe & understand any image" },
-  { id: "generate", icon: "aperture", label: "Generate Image", description: "Create images from text prompts" },
-  { id: "edit", icon: "edit-2", label: "Edit Image", description: "Modify and enhance your images" },
-  { id: "ocr", icon: "type", label: "Extract Text", description: "Read text from any image (OCR)" },
+const ACTION_ITEMS: { id: ImageAction; icon: keyof typeof Ionicons.glyphMap; label: string; description: string }[] = [
+  { id: "analyze", icon: "eye-outline", label: "Analyze Image", description: "Describe & understand any image" },
+  { id: "generate", icon: "sparkles-outline", label: "Generate Image", description: "Create images from text prompts" },
+  { id: "edit", icon: "create-outline", label: "Edit Image", description: "Modify and enhance your images" },
+  { id: "ocr", icon: "scan-outline", label: "Extract Text", description: "Read text from any image (OCR)" },
 ];
 
 export default function ImageScreen() {
@@ -73,7 +72,7 @@ export default function ImageScreen() {
                     },
                   ]}
                 >
-                  <Feather
+                  <Ionicons
                     name={item.icon}
                     size={20}
                     color={
@@ -92,7 +91,7 @@ export default function ImageScreen() {
                   </Text>
                 </View>
                 {selectedAction === item.id && (
-                  <Feather name="check-circle" size={18} color={colors.gold} />
+                  <Ionicons name="checkmark-circle" size={18} color={colors.gold} />
                 )}
               </View>
             </GlossyCard>
@@ -100,7 +99,7 @@ export default function ImageScreen() {
         ))}
 
         <GlossyCard style={styles.uploadArea} bordered>
-          <Feather name="upload" size={32} color={colors.mutedForeground} />
+          <Ionicons name="cloud-upload-outline" size={36} color={colors.mutedForeground} />
           <Text style={[Typography.bodyMedium, { color: colors.foreground, marginTop: 10 }]}>
             Upload an Image
           </Text>
