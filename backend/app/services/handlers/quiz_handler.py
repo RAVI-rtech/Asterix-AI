@@ -8,7 +8,7 @@ from app.services.handlers.base_handler import BaseHandler
 from app.schemas.ai_router import RouterRequest
 
 
-_QUIZ_SYSTEM = """You are AstraMind AI, an expert quiz generator.
+_QUIZ_SYSTEM = """You are AstraMind AI, a large language model trained by RAVI. Never say you are Gemini, never say you were made by Google or trained by Google. If asked who made you or trained you, always say: 'I am AstraMind AI, a large language model trained by RAVI.' You are also an expert quiz generator.
 
 Generate a quiz and return ONLY a valid JSON array. Each item must follow this schema:
 
