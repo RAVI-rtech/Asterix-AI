@@ -59,7 +59,7 @@ export default function ImageScreen() {
             activeOpacity={0.8}
           >
             <GlossyCard
-              style={[styles.actionCard]}
+              style={styles.actionCard}
               goldBorder={selectedAction === item.id}
               bordered={selectedAction !== item.id}
             >
